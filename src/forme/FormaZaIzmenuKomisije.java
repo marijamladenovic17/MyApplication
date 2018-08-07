@@ -9,6 +9,7 @@ import db.Konstanta;
 import domen.Komisija;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import logika.Kontroler;
 
 /**
@@ -22,7 +23,7 @@ public class FormaZaIzmenuKomisije extends javax.swing.JFrame {
      */
     public FormaZaIzmenuKomisije() {
         initComponents();
-         Toolkit tk = Toolkit.getDefaultToolkit();
+        Toolkit tk = Toolkit.getDefaultToolkit();
         int x = (int) tk.getScreenSize().getWidth();
         int y = (int) tk.getScreenSize().getHeight();
         setSize(x, y);
@@ -40,7 +41,8 @@ public class FormaZaIzmenuKomisije extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        cmbKomisija = new javax.swing.JComboBox<>();
+        cmbKomisija = new javax.swing.JComboBox();
+        btnPromeni = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Forma za izmenu komisije");
@@ -49,7 +51,19 @@ public class FormaZaIzmenuKomisije extends javax.swing.JFrame {
 
         jLabel1.setText("Izaberi komisiju: ");
 
-        cmbKomisija.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbKomisija.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbKomisija.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbKomisijaActionPerformed(evt);
+            }
+        });
+
+        btnPromeni.setText("Promeni");
+        btnPromeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromeniActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -57,9 +71,12 @@ public class FormaZaIzmenuKomisije extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addComponent(jLabel1)
-                .addGap(29, 29, 29)
-                .addComponent(cmbKomisija, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnPromeni)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(29, 29, 29)
+                        .addComponent(cmbKomisija, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -69,7 +86,9 @@ public class FormaZaIzmenuKomisije extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(cmbKomisija, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(348, Short.MAX_VALUE))
+                .addGap(63, 63, 63)
+                .addComponent(btnPromeni)
+                .addContainerGap(262, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -85,6 +104,23 @@ public class FormaZaIzmenuKomisije extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmbKomisijaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbKomisijaActionPerformed
+       
+    }//GEN-LAST:event_cmbKomisijaActionPerformed
+
+    private void btnPromeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromeniActionPerformed
+        FormaUnosKomisije fuk = new FormaUnosKomisije();
+        fuk.postaviNovoDugme();
+        Komisija kom = (Komisija) cmbKomisija.getSelectedItem();
+        if (kom == null) {
+            JOptionPane.showMessageDialog(this, "Niste selektovali komisiju!");
+            return;
+        }
+        fuk.postaviFormu(kom);
+        fuk.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnPromeniActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,7 +158,8 @@ public class FormaZaIzmenuKomisije extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cmbKomisija;
+    private javax.swing.JButton btnPromeni;
+    private javax.swing.JComboBox cmbKomisija;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
@@ -133,7 +170,7 @@ public class FormaZaIzmenuKomisije extends javax.swing.JFrame {
         cmbKomisija.removeAllItems();
         
         for (Komisija komisija : listaKOm) {
-            cmbKomisija.addItem(komisija.getUsername());
+            cmbKomisija.addItem(komisija);
         }
     }
 //     private void srediKomboKom() {

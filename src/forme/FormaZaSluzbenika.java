@@ -72,6 +72,11 @@ public class FormaZaSluzbenika extends javax.swing.JFrame {
         jMenu1.add(miUnosKomisije);
 
         miIzmenaKomisije.setText("Izmena komisije");
+        miIzmenaKomisije.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miIzmenaKomisijeActionPerformed(evt);
+            }
+        });
         jMenu1.add(miIzmenaKomisije);
 
         miUnosKandidata.setText("Unos kandidata");
@@ -126,6 +131,12 @@ public class FormaZaSluzbenika extends javax.swing.JFrame {
         this.setVisible(false);
 
     }//GEN-LAST:event_miUnosKandidataActionPerformed
+
+    private void miIzmenaKomisijeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miIzmenaKomisijeActionPerformed
+       FormaZaIzmenuKomisije fzik = new FormaZaIzmenuKomisije();
+       fzik.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_miIzmenaKomisijeActionPerformed
 
     /**
      * @param args the command line arguments
