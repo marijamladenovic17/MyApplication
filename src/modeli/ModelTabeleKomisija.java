@@ -22,10 +22,6 @@ public class ModelTabeleKomisija extends AbstractTableModel{
     public ModelTabeleKomisija() {
         clanovi = new ArrayList<Clan>();
     }
-
-    public ModelTabeleKomisija(List<Clan> clanovi) {
-        this.clanovi = clanovi;
-    }
     
     
 

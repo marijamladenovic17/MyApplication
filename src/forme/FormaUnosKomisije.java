@@ -33,7 +33,6 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
         int y = (int) tk.getScreenSize().getHeight();
         setSize(x, y);
         srediTabelu();
-        btnPromeniKom.setVisible(false);
     }
 
     /**
@@ -58,8 +57,6 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
         tabelaClanova = new javax.swing.JTable();
         btnUnesiKomisiju = new javax.swing.JButton();
         btnPlus = new javax.swing.JButton();
-        btnVratiSeNazad = new javax.swing.JButton();
-        btnPromeniKom = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Unos nove komisije");
@@ -108,20 +105,6 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
             }
         });
 
-        btnVratiSeNazad.setText("Vrati se nazad");
-        btnVratiSeNazad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVratiSeNazadActionPerformed(evt);
-            }
-        });
-
-        btnPromeniKom.setText("Promeni komisiju");
-        btnPromeniKom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPromeniKomActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -130,12 +113,7 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnPromeniKom)
-                        .addGap(61, 61, 61)
-                        .addComponent(btnVratiSeNazad)
-                        .addGap(41, 41, 41)
-                        .addComponent(btnUnesiKomisiju)
-                        .addGap(26, 26, 26))
+                        .addComponent(btnUnesiKomisiju))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,10 +160,7 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnUnesiKomisiju)
-                    .addComponent(btnVratiSeNazad)
-                    .addComponent(btnPromeniKom))
+                .addComponent(btnUnesiKomisiju)
                 .addGap(101, 101, 101))
         );
 
@@ -247,44 +222,6 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
         fzc.setVisible(true);
     }//GEN-LAST:event_btnPlusActionPerformed
 
-    private void btnVratiSeNazadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVratiSeNazadActionPerformed
-        FormaZaSluzbenika fzs = new FormaZaSluzbenika();
-        fzs.setVisible(true);
-        this.dispose();
-        
-    }//GEN-LAST:event_btnVratiSeNazadActionPerformed
-
-    private void btnPromeniKomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromeniKomActionPerformed
-       ModelTabeleKomisija mtk = (ModelTabeleKomisija) tabelaClanova.getModel();
-        ArrayList<Clan> listaC = (ArrayList<Clan>) mtk.getClanovi();
-        
-        for (int i = 0; i < listaC.size()-1; i++) {
-            for (int j = i+1; j < listaC.size(); j++) {
-                if(listaC.get(i).equals(listaC.get(j))) {
-                     JOptionPane.showMessageDialog(this, "Uneli ste istog clana dva puta!");
-                     return;
-                }
-                
-            }
-            
-        }
-        String id = txtIDkom.getText();
-        int komID = Integer.parseInt(id);
-        String username = txtUsernameKom.getText();
-        String pass = txtPassKom.getText();
-        if(id.isEmpty() || username.isEmpty() || pass.isEmpty() || listaC==null) {
-             JOptionPane.showMessageDialog(this, "Niste uneli sve podatke!");
-             return;
-        }
-        Komisija kom = new Komisija(komID, username, pass, listaC);
-        boolean sacuvaj = Kontroler.getInstance().promeniKomisiju(kom);
-         if(sacuvaj) {
-            JOptionPane.showMessageDialog(this, "Uspesno promenjena komisija!");
-        } else {
-        JOptionPane.showMessageDialog(this, "Neuspesno  promenjena omisija!");
-        }
-    }//GEN-LAST:event_btnPromeniKomActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -323,9 +260,7 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMinus;
     private javax.swing.JButton btnPlus;
-    private javax.swing.JButton btnPromeniKom;
     private javax.swing.JButton btnUnesiKomisiju;
-    private javax.swing.JButton btnVratiSeNazad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -369,25 +304,6 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
     void dodajClana(Clan clan) {
         ModelTabeleKomisija mtk = (ModelTabeleKomisija) tabelaClanova.getModel();
         mtk.dodajClana(clan);
-
-    }
-
-    void postaviFormu(Komisija kom) {
-      txtIDkom.setText(kom.getKomisijaID()+"");
-      txtPassKom.setText(kom.getPassword());
-      txtUsernameKom.setText(kom.getUsername());
-      ModelTabeleKomisija mtk = new ModelTabeleKomisija();
-      tabelaClanova.setModel(mtk);
-      ArrayList<Clan> likom = (ArrayList<Clan>) kom.getListaClanova();
-        for (Clan clan : likom) {
-         mtk.dodajClana(clan);
-        }
-    }
-
-    void postaviNovoDugme() {
-        btnPromeniKom.setVisible(true);
-        btnUnesiKomisiju.setVisible(false);
-        btnVratiSeNazad.setVisible(false);
 
     }
 

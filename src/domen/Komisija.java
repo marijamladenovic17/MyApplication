@@ -57,10 +57,14 @@ public class Komisija {
 
     @Override
     public String toString() {
-        return username;
+        return "";
     }
 
-    
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
 
     @Override
     public boolean equals(Object obj) {

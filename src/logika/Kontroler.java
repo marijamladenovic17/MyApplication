@@ -124,25 +124,6 @@ public class Kontroler {
         return ubacen;
     }
 
-    public boolean promeniKomisiju(Komisija kom) {
-       boolean ubacen = false;
-        try {
-            
-            db.ucitajDriver();
-            db.otvoriKonekciju();
-            db.promeniKomisiju(kom);
-            
-            db.zatvoriKonekciju();
-            ubacen = true;
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return ubacen;
-    }
-
    
     
     
