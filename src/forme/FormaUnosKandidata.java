@@ -5,7 +5,9 @@
  */
 package forme;
 
+import domen.Clan;
 import java.awt.Toolkit;
+import modeli.ModelTabeleKomisija;
 
 /**
  *
@@ -262,4 +264,6 @@ public class FormaUnosKandidata extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrezime;
     private javax.swing.JTextField txtSifraPrijave;
     // End of variables declaration//GEN-END:variables
+
+    
 }

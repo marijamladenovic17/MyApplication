@@ -35,14 +35,40 @@ public class ModelTabeleKomisija extends AbstractTableModel{
         return 2;
     }
 
+    public List<Clan> getClanovi() {
+        return clanovi;
+    }
+
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Clan c = clanovi.get(rowIndex);
         switch(columnIndex){
-            case 1: return c.getIme();
-            case 2: return c.getPrezime();
+            case 0: return c.getIme();
+            case 1: return c.getPrezime();
             default: return "Ja sam Spiderman";
         }
     }
+
+    @Override
+    public String getColumnName(int column) {
+        
+        
+        switch(column){
+            case 0: return "Ime";
+            case 1: return "Prezime";
+            default: return "Ja sam Spiderman";
+        }
+    }
+
+    public void dodajClana(Clan clan) {
+       clanovi.add(clan);
+       fireTableDataChanged();
+    }
+
+    public void obrisiKomisiju(int red) {
+       clanovi.remove(red);
+       fireTableDataChanged();
+    }
+    
     
 }

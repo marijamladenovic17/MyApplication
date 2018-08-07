@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import jdk.nashorn.internal.ir.BreakNode;
 import logika.Kontroler;
+import modeli.ModelTabeleKomisija;
 
 /**
  *
@@ -31,7 +32,7 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
         int x = (int) tk.getScreenSize().getWidth();
         int y = (int) tk.getScreenSize().getHeight();
         setSize(x, y);
-       
+        srediTabelu();
     }
 
     /**
@@ -43,20 +44,24 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         txtIDkom = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         txtUsernameKom = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         txtPassKom = new javax.swing.JTextField();
-        btnUnesiKomisiju = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnMinus = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaClanova = new javax.swing.JTable();
+        btnUnesiKomisiju = new javax.swing.JButton();
+        btnPlus = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Unos nove komisije");
+
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
         jLabel1.setText("ID nove komisije:");
 
@@ -64,23 +69,16 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
 
         jLabel3.setText("Password:");
 
-        btnUnesiKomisiju.setText("Unesi komisiju");
-        btnUnesiKomisiju.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUnesiKomisijuActionPerformed(evt);
-            }
-        });
-
         jLabel7.setText("Molimo unesite clanove:");
 
-        jButton1.setText("+");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnMinus.setText("-");
+        btnMinus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnMinusActionPerformed(evt);
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaClanova.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -91,68 +89,90 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelaClanova);
+
+        btnUnesiKomisiju.setText("Unesi komisiju");
+        btnUnesiKomisiju.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUnesiKomisijuActionPerformed(evt);
+            }
+        });
+
+        btnPlus.setText("+");
+        btnPlus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlusActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnUnesiKomisiju))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnPlus, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnMinus, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(11, 11, 11))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(84, 84, 84)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPassKom)
+                                    .addComponent(txtUsernameKom)
+                                    .addComponent(txtIDkom))))))
+                .addGap(43, 43, 43))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtIDkom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(txtUsernameKom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtPassKom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(btnMinus)
+                    .addComponent(btnPlus))
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                .addComponent(btnUnesiKomisiju)
+                .addGap(101, 101, 101))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addGap(34, 34, 34)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtIDkom, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                                    .addComponent(txtUsernameKom)
-                                    .addComponent(txtPassKom)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnUnesiKomisiju)))
-                .addGap(49, 49, 49))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(63, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtIDkom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtUsernameKom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtPassKom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                        .addComponent(btnUnesiKomisiju)
-                        .addGap(21, 21, 21))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -160,35 +180,47 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
 
     private void btnUnesiKomisijuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnesiKomisijuActionPerformed
         // TODO add your handling code here:
-//        
-//        int komID= Integer.parseInt(txtIDkom.getText());
-//        String username = txtUsernameKom.getText();
-//        String pass = txtPassKom.getText();
-//        Clan c1 = (Clan) cmbPrviClan.getSelectedItem();
-//        Clan c2 = (Clan) cmbDrugiClan.getSelectedItem();
-//        Clan c3 = (Clan) cmbTreciClan.getSelectedItem();
-//        List<Clan> listac = new ArrayList<>();
-//        if(c1.equals(c2) || c1.equals(c3)  || c2.equals(c3))  {
-//            JOptionPane.showMessageDialog(this, "Clanovi komisije moraju biti razliciti!");
-//            return;
-//        } else{
-//            listac.add(c1);
-//            listac.add(c2);
-//            listac.add(c3);
-//        }
-//        Komisija novaKom = new Komisija(komID, username, pass, listac);
-//        boolean ubacenaKom = Kontroler.getInstance().ubaciKomisiju(novaKom);
-//        
-//        if(ubacenaKom) {
-//            JOptionPane.showMessageDialog(this, "Uspesno ubacena komisija!");
-//        } else {
-//        JOptionPane.showMessageDialog(this, "Neuspesno  ubacena komisija!");
-//        }
+        ModelTabeleKomisija mtk = (ModelTabeleKomisija) tabelaClanova.getModel();
+        ArrayList<Clan> listaC = (ArrayList<Clan>) mtk.getClanovi();
+        
+        for (int i = 0; i < listaC.size()-1; i++) {
+            for (int j = i+1; j < listaC.size(); j++) {
+                if(listaC.get(i).equals(listaC.get(j))) {
+                     JOptionPane.showMessageDialog(this, "Uneli ste istog clana dva puta!");
+                     return;
+                }
+                
+            }
+            
+        }
+        String id = txtIDkom.getText();
+        int komID = Integer.parseInt(id);
+        String username = txtUsernameKom.getText();
+        String pass = txtPassKom.getText();
+        if(id.isEmpty() || username.isEmpty() || pass.isEmpty() || listaC==null) {
+             JOptionPane.showMessageDialog(this, "Niste uneli sve podatke!");
+             return;
+        }
+        Komisija kom = new Komisija(komID, username, pass, listaC);
+        boolean sacuvaj = Kontroler.getInstance().ubaciKomisiju(kom);
+         if(sacuvaj) {
+            JOptionPane.showMessageDialog(this, "Uspesno ubacena komisija!");
+        } else {
+        JOptionPane.showMessageDialog(this, "Neuspesno  ubacena komisija!");
+        }
+
     }//GEN-LAST:event_btnUnesiKomisijuActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnMinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinusActionPerformed
+        ModelTabeleKomisija mtk = (ModelTabeleKomisija) tabelaClanova.getModel();
+        int red = tabelaClanova.getSelectedRow();
+        mtk.obrisiKomisiju(red);
+    }//GEN-LAST:event_btnMinusActionPerformed
+
+    private void btnPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlusActionPerformed
+         FormaZaUnosClanova fzc = new FormaZaUnosClanova(this, true);
+        fzc.setVisible(true);
+    }//GEN-LAST:event_btnPlusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,14 +258,16 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnMinus;
+    private javax.swing.JButton btnPlus;
     private javax.swing.JButton btnUnesiKomisiju;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabelaClanova;
     private javax.swing.JTextField txtIDkom;
     private javax.swing.JTextField txtPassKom;
     private javax.swing.JTextField txtUsernameKom;
@@ -262,5 +296,15 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
 //        }
     }
 
-    
+    private void srediTabelu() {
+        ModelTabeleKomisija mtk = new ModelTabeleKomisija();
+        tabelaClanova.setModel(mtk);
+    }
+
+    void dodajClana(Clan clan) {
+        ModelTabeleKomisija mtk = (ModelTabeleKomisija) tabelaClanova.getModel();
+        mtk.dodajClana(clan);
+
+    }
+
 }
