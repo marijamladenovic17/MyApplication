@@ -33,6 +33,8 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
         int y = (int) tk.getScreenSize().getHeight();
         setSize(x, y);
         srediTabelu();
+        btnPromeni.setVisible(false);
+        
     }
 
     /**
@@ -57,6 +59,8 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
         tabelaClanova = new javax.swing.JTable();
         btnUnesiKomisiju = new javax.swing.JButton();
         btnPlus = new javax.swing.JButton();
+        btnGlavni = new javax.swing.JButton();
+        btnPromeni = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Unos nove komisije");
@@ -105,6 +109,20 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
             }
         });
 
+        btnGlavni.setText("Glavni meni");
+        btnGlavni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGlavniActionPerformed(evt);
+            }
+        });
+
+        btnPromeni.setText("Promeni komisiju");
+        btnPromeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromeniActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -113,6 +131,10 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnPromeni)
+                        .addGap(59, 59, 59)
+                        .addComponent(btnGlavni, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43)
                         .addComponent(btnUnesiKomisiju))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
@@ -160,7 +182,10 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
-                .addComponent(btnUnesiKomisiju)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnUnesiKomisiju)
+                    .addComponent(btnGlavni)
+                    .addComponent(btnPromeni))
                 .addGap(101, 101, 101))
         );
 
@@ -214,6 +239,10 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
     private void btnMinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinusActionPerformed
         ModelTabeleKomisija mtk = (ModelTabeleKomisija) tabelaClanova.getModel();
         int red = tabelaClanova.getSelectedRow();
+        if(red==-1) {
+            JOptionPane.showMessageDialog(this, "Morate da izaberete red!");
+            return;
+        }
         mtk.obrisiKomisiju(red);
     }//GEN-LAST:event_btnMinusActionPerformed
 
@@ -221,6 +250,44 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
          FormaZaUnosClanova fzc = new FormaZaUnosClanova(this, true);
         fzc.setVisible(true);
     }//GEN-LAST:event_btnPlusActionPerformed
+
+    private void btnGlavniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGlavniActionPerformed
+       FormaZaSluzbenika fzs = new FormaZaSluzbenika();
+       fzs.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_btnGlavniActionPerformed
+
+    private void btnPromeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromeniActionPerformed
+         ModelTabeleKomisija mtk = (ModelTabeleKomisija) tabelaClanova.getModel();
+        ArrayList<Clan> listaC = (ArrayList<Clan>) mtk.getClanovi();
+        
+        for (int i = 0; i < listaC.size()-1; i++) {
+            for (int j = i+1; j < listaC.size(); j++) {
+                if(listaC.get(i).equals(listaC.get(j))) {
+                     JOptionPane.showMessageDialog(this, "Uneli ste istog clana dva puta!");
+                     return;
+                }
+                
+            }
+            
+        }
+        String id = txtIDkom.getText();
+        int komID = Integer.parseInt(id);
+        String username = txtUsernameKom.getText();
+        String pass = txtPassKom.getText();
+        if(id.isEmpty() || username.isEmpty() || pass.isEmpty() || listaC==null) {
+             JOptionPane.showMessageDialog(this, "Niste uneli sve podatke!");
+             return;
+        }
+        Komisija kom = new Komisija(komID, username, pass, listaC);
+        boolean sacuvaj = Kontroler.getInstance().promeniKomisiju(kom);
+        
+         if(sacuvaj) {
+            JOptionPane.showMessageDialog(this, "Uspesno promenjena komisija!");
+        } else {
+        JOptionPane.showMessageDialog(this, "Neuspesno  promenjena komisija!");
+        }
+    }//GEN-LAST:event_btnPromeniActionPerformed
 
     /**
      * @param args the command line arguments
@@ -258,8 +325,10 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGlavni;
     private javax.swing.JButton btnMinus;
     private javax.swing.JButton btnPlus;
+    private javax.swing.JButton btnPromeni;
     private javax.swing.JButton btnUnesiKomisiju;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -305,6 +374,24 @@ public class FormaUnosKomisije extends javax.swing.JFrame {
         ModelTabeleKomisija mtk = (ModelTabeleKomisija) tabelaClanova.getModel();
         mtk.dodajClana(clan);
 
+    }
+
+    void srediFormu(Komisija kom) {
+        txtIDkom.setText(kom.getKomisijaID()+"");
+        txtUsernameKom.setText(kom.getUsername());
+        txtPassKom.setText(kom.getPassword());
+        ArrayList<Clan> lic=(ArrayList<Clan>) kom.getListaClanova();
+        ModelTabeleKomisija mtk = new  ModelTabeleKomisija();
+        tabelaClanova.setModel(mtk);
+        for (Clan clan : lic) {
+            mtk.dodajClana(clan);
+        }
+    }
+
+    void srediDugme() {
+      btnPromeni.setVisible(true);
+      btnUnesiKomisiju.setVisible(false);
+      
     }
 
 }

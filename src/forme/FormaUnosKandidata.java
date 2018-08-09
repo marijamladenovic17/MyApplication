@@ -6,7 +6,15 @@
 package forme;
 
 import domen.Clan;
+import domen.Drzevljanstvo;
+import domen.Kandidat;
+import domen.Nacionalnost;
+import domen.SrednjaSkola;
+import domen.ZanimanjeRoditelja;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import logika.Kontroler;
 import modeli.ModelTabeleKomisija;
 
 /**
@@ -14,6 +22,8 @@ import modeli.ModelTabeleKomisija;
  * @author PC
  */
 public class FormaUnosKandidata extends javax.swing.JFrame {
+
+    boolean zenskiPol = false;
 
     /**
      * Creates new form FormaUnosKandidata
@@ -24,6 +34,11 @@ public class FormaUnosKandidata extends javax.swing.JFrame {
         int x = (int) tk.getScreenSize().getWidth();
         int y = (int) tk.getScreenSize().getHeight();
         setSize(x, y);
+        srediKomboDrzevljanstvo();
+        srediKomboSifraZanimanja();
+        srediKomboNacionalnost();
+        srediKomboSifraSrednjeSkole();
+
     }
 
     /**
@@ -36,31 +51,41 @@ public class FormaUnosKandidata extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroupPol = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         txtPrezime = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         txtImeRoditelja = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         txtImeKandidata = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        jRMuski = new javax.swing.JRadioButton();
+        jRZenski = new javax.swing.JRadioButton();
+        jLabel9 = new javax.swing.JLabel();
+        txtJMBG = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        txtSifraPrijave = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        txtJMBG = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        cmbDrzevljanstvo = new javax.swing.JComboBox();
         jLabel10 = new javax.swing.JLabel();
         txtMobilniTel = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txtFixTel = new javax.swing.JTextField();
         btnUnesiKandidata = new javax.swing.JButton();
+        cmbSifraZanimanja = new javax.swing.JComboBox();
+        cmbNacionalnost = new javax.swing.JComboBox();
+        cmbSifraSkole = new javax.swing.JComboBox();
+        btnGlavniMeni = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        txtSifraPrijave = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Unos novog kanidata");
+
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Unos kandidata"));
 
         jLabel1.setText("Prezime:");
 
@@ -70,16 +95,23 @@ public class FormaUnosKandidata extends javax.swing.JFrame {
 
         jLabel4.setText("Pol:");
 
-        buttonGroupPol.add(jRadioButton1);
-        jRadioButton1.setText("M");
-
-        buttonGroupPol.add(jRadioButton2);
-        jRadioButton2.setText("Z");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroupPol.add(jRMuski);
+        jRMuski.setText("M");
+        jRMuski.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                jRMuskiActionPerformed(evt);
             }
         });
+
+        buttonGroupPol.add(jRZenski);
+        jRZenski.setText("Z");
+        jRZenski.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRZenskiActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("JMBG:");
 
         jLabel5.setText("Drzavljanstvo:");
 
@@ -87,122 +119,267 @@ public class FormaUnosKandidata extends javax.swing.JFrame {
 
         jLabel7.setText("Nacionalnost:");
 
-        jLabel8.setText("Broj prijave:");
+        jLabel11.setText("Sifra srednje skole:");
 
-        jLabel9.setText("JMBG:");
+        cmbDrzevljanstvo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel10.setText("Mobilni:");
-
-        jLabel11.setText("Sifra srednje skole:");
 
         jLabel12.setText("Fiksni telefon:");
 
         btnUnesiKandidata.setText("Unesi kandidata");
+        btnUnesiKandidata.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUnesiKandidataActionPerformed(evt);
+            }
+        });
+
+        cmbSifraZanimanja.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cmbNacionalnost.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cmbSifraSkole.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnGlavniMeni.setText("Glavni meni");
+        btnGlavniMeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGlavniMeniActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(jLabel10)))
+                        .addGap(46, 46, 46)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtMobilniTel, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                                .addComponent(jLabel12)
+                                .addGap(28, 28, 28)
+                                .addComponent(txtFixTel, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPrezime, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtImeRoditelja, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtImeKandidata, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtJMBG, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(cmbDrzevljanstvo, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(175, 175, 175))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(cmbSifraZanimanja, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(78, 78, 78)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addGap(279, 279, 279)
+                                        .addComponent(jLabel11)
+                                        .addGap(49, 49, 49))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(cmbNacionalnost, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(58, 58, 58)
+                                        .addComponent(cmbSifraSkole, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(27, 27, 27))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jRZenski, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4)
+                                .addComponent(jRMuski)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(1, 1, 1)
+                                    .addComponent(jLabel9))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGlavniMeni, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(btnUnesiKandidata, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtPrezime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtImeRoditelja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtImeKandidata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel11)
+                        .addComponent(jLabel7))
+                    .addComponent(jLabel5))
+                .addGap(25, 25, 25)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cmbDrzevljanstvo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbNacionalnost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbSifraSkole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbSifraZanimanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jRMuski))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jRZenski)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtJMBG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtMobilniTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12)
+                    .addComponent(txtFixTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnUnesiKandidata, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGlavniMeni, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(" "));
+
+        jLabel8.setText("Broj prijave:");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel8)
+                .addGap(49, 49, 49)
+                .addComponent(txtSifraPrijave, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSifraPrijave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel10)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtMobilniTel))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel9)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtJMBG, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(45, 45, 45)
-                            .addComponent(jLabel12)
-                            .addGap(27, 27, 27)
-                            .addComponent(txtFixTel, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(34, 34, 34)
-                            .addComponent(btnUnesiKandidata))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(68, 68, 68)
-                                    .addComponent(jLabel2))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(txtPrezime, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtImeRoditelja, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addGap(48, 48, 48)
-                                    .addComponent(jLabel5)
-                                    .addGap(34, 34, 34)
-                                    .addComponent(jLabel6)))
-                            .addGap(51, 51, 51)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addComponent(txtImeKandidata, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addGap(32, 32, 32)
-                                    .addComponent(jLabel11))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtSifraPrijave, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtSifraPrijave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPrezime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtImeRoditelja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtImeKandidata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel11))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton2)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(txtJMBG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtMobilniTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12)
-                    .addComponent(txtFixTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUnesiKandidata))
-                .addGap(24, 24, 24))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    private void jRZenskiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRZenskiActionPerformed
+        zenskiPol = true;
+    }//GEN-LAST:event_jRZenskiActionPerformed
+
+    private void btnGlavniMeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGlavniMeniActionPerformed
+        FormaZaSluzbenika fzs = new FormaZaSluzbenika();
+        fzs.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnGlavniMeniActionPerformed
+
+    private void btnUnesiKandidataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnesiKandidataActionPerformed
+        String brojP = txtSifraPrijave.getText();
+        String ime = txtImeKandidata.getText();
+        String imeRoditelja = txtImeRoditelja.getText();
+        String prezime = txtPrezime.getText();
+        String pol;
+        if (zenskiPol == true) {
+            pol = "Zenski";
+        } else {
+            pol = "Muski";
+        }
+        Drzevljanstvo drzevlj = (Drzevljanstvo) cmbDrzevljanstvo.getSelectedItem();
+        ZanimanjeRoditelja z = (ZanimanjeRoditelja) cmbSifraZanimanja.getSelectedItem();
+        Nacionalnost nac = (Nacionalnost) cmbNacionalnost.getSelectedItem();
+        SrednjaSkola ss = (SrednjaSkola) cmbSifraSkole.getSelectedItem();
+        String jmbg = txtJMBG.getText();
+        String mobilni = txtMobilniTel.getText();
+        String fiksni = txtFixTel.getText();
+        if (brojP.isEmpty() || ime.isEmpty() || imeRoditelja.isEmpty() || prezime.isEmpty() || pol.isEmpty() || drzevlj == null
+                || z == null || nac == null || ss == null || jmbg.isEmpty() || mobilni.isEmpty() || fiksni.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Unesite sva polja!");
+            return;
+
+        }
+        System.out.println("pol" + pol);
+        String regex = "06[0,1,2,3,4,5,6,9]-[0-9]+";
+
+        if (!mobilni.matches(regex)) {
+            JOptionPane.showMessageDialog(this, "Unesite broj mobilnog u formatu 06x-xxxxxxx!");
+            return;
+        }
+        int brojPrijave = 0;
+        regex = "[0-9]+";
+        if (brojP.matches(regex)) {
+            brojPrijave = Integer.parseInt(brojP);
+        } else {
+            JOptionPane.showMessageDialog(this, "Unesite broj za polje BROJ PRIJAVE!");
+            return;
+        }
+        
+        if(jmbg.length()!=13) {
+            JOptionPane.showMessageDialog(this, "JMBG ima 13 cifara!");
+            return;
+        }
+        
+        regex = "01[0-9]/[0-9]+";
+        if(!fiksni.matches(regex)){
+            JOptionPane.showMessageDialog(this, "Unesite fiksni telefon u formatu 01x/xxxxxxx");
+            return;
+        }
+        Kandidat kandidat = new Kandidat(brojPrijave, jmbg, ime, imeRoditelja, pol, prezime, mobilni, fiksni, ss, nac, z, drzevlj);
+        boolean sacuvano = Kontroler.getInstance().sacuvajKandidata(kandidat);
+        if(sacuvano){
+            JOptionPane.showMessageDialog(this, "Uspesno sacuvan kandidat!");
+        }else {
+             JOptionPane.showMessageDialog(this, "Nespesno sacuvan kandidat!");
+        }
+    }//GEN-LAST:event_btnUnesiKandidataActionPerformed
+
+    private void jRMuskiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRMuskiActionPerformed
+        zenskiPol = false;
+    }//GEN-LAST:event_jRMuskiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,8 +417,13 @@ public class FormaUnosKandidata extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGlavniMeni;
     private javax.swing.JButton btnUnesiKandidata;
     private javax.swing.ButtonGroup buttonGroupPol;
+    private javax.swing.JComboBox cmbDrzevljanstvo;
+    private javax.swing.JComboBox cmbNacionalnost;
+    private javax.swing.JComboBox cmbSifraSkole;
+    private javax.swing.JComboBox cmbSifraZanimanja;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -254,8 +436,10 @@ public class FormaUnosKandidata extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JRadioButton jRMuski;
+    private javax.swing.JRadioButton jRZenski;
     private javax.swing.JTextField txtFixTel;
     private javax.swing.JTextField txtImeKandidata;
     private javax.swing.JTextField txtImeRoditelja;
@@ -265,5 +449,40 @@ public class FormaUnosKandidata extends javax.swing.JFrame {
     private javax.swing.JTextField txtSifraPrijave;
     // End of variables declaration//GEN-END:variables
 
-    
+    private void srediKomboDrzevljanstvo() {
+        ArrayList<Drzevljanstvo> listaD = Kontroler.getInstance().vratiDrzevljanstvo();
+        cmbDrzevljanstvo.removeAllItems();
+
+        for (Drzevljanstvo drzevljanstvo : listaD) {
+            cmbDrzevljanstvo.addItem(drzevljanstvo);
+        }
+    }
+
+    private void srediKomboSifraZanimanja() {
+        ArrayList<ZanimanjeRoditelja> listaSZ = Kontroler.getInstance().vratiSZ();
+        cmbSifraZanimanja.removeAllItems();
+
+        for (ZanimanjeRoditelja zanimanjeRoditelja : listaSZ) {
+            cmbSifraZanimanja.addItem(zanimanjeRoditelja);
+        }
+    }
+
+    private void srediKomboNacionalnost() {
+        ArrayList<Nacionalnost> listaN = Kontroler.getInstance().vratiNacionalnost();
+        cmbNacionalnost.removeAllItems();
+
+        for (Nacionalnost nacionalnost : listaN) {
+            cmbNacionalnost.addItem(nacionalnost);
+        }
+    }
+
+    private void srediKomboSifraSrednjeSkole() {
+        ArrayList<SrednjaSkola> listaSS = Kontroler.getInstance().vratiSS();
+        cmbSifraSkole.removeAllItems();
+
+        for (SrednjaSkola srednjaSkola : listaSS) {
+            cmbSifraSkole.addItem(srednjaSkola);
+        }
+    }
+
 }

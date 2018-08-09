@@ -48,6 +48,10 @@
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
+                          <Component id="btnPromeni" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                          <Component id="btnGlavni" min="-2" pref="104" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                           <Component id="btnUnesiKomisiju" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
@@ -109,7 +113,11 @@
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="121" max="-2" attributes="0"/>
                   <EmptySpace pref="145" max="32767" attributes="0"/>
-                  <Component id="btnUnesiKomisiju" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnUnesiKomisiju" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnGlavni" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnPromeni" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -185,6 +193,22 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPlusActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnGlavni">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Glavni meni"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGlavniActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnPromeni">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Promeni komisiju"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPromeniActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

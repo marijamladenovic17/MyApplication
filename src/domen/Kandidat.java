@@ -12,9 +12,12 @@ import java.util.List;
  * @author PC
  */
 public class Kandidat {
+
     private int sifraPrijave;
     private String jmbg;
+    private String ime;
     private String imeRoditelja;
+    private String pol;
     private String prezime;
     private String mobilni;
     private String fiksni;
@@ -27,10 +30,12 @@ public class Kandidat {
     public Kandidat() {
     }
 
-    public Kandidat(int sifraPrijave, String jmbg, String imeRoditelja, String prezime, String mobilni, String fiksni, SrednjaSkola srednjaSkola, Nacionalnost nacionalnost, ZanimanjeRoditelja zanimanjeRoditelja, Drzevljanstvo drzevljanstvo, List<Karton> listaKartona) {
+    public Kandidat(int sifraPrijave, String jmbg, String ime, String imeRoditelja, String pol, String prezime, String mobilni, String fiksni, SrednjaSkola srednjaSkola, Nacionalnost nacionalnost, ZanimanjeRoditelja zanimanjeRoditelja, Drzevljanstvo drzevljanstvo) {
         this.sifraPrijave = sifraPrijave;
         this.jmbg = jmbg;
+        this.ime = ime;
         this.imeRoditelja = imeRoditelja;
+        this.pol = pol;
         this.prezime = prezime;
         this.mobilni = mobilni;
         this.fiksni = fiksni;
@@ -38,7 +43,23 @@ public class Kandidat {
         this.nacionalnost = nacionalnost;
         this.zanimanjeRoditelja = zanimanjeRoditelja;
         this.drzevljanstvo = drzevljanstvo;
-        this.listaKartona = listaKartona;
+
+    }
+
+    public void setPol(String pol) {
+        this.pol = pol;
+    }
+
+    public String getPol() {
+        return pol;
+    }
+
+    public String getIme() {
+        return ime;
+    }
+
+    public void setIme(String ime) {
+        this.ime = ime;
     }
 
     public List<Karton> getListaKartona() {
@@ -128,7 +149,5 @@ public class Kandidat {
     public void setDrzevljanstvo(Drzevljanstvo drzevljanstvo) {
         this.drzevljanstvo = drzevljanstvo;
     }
-    
-    
-           
+
 }

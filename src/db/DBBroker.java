@@ -6,7 +6,12 @@
 package db;
 
 import domen.Clan;
+import domen.Drzevljanstvo;
+import domen.Kandidat;
 import domen.Komisija;
+import domen.Nacionalnost;
+import domen.SrednjaSkola;
+import domen.ZanimanjeRoditelja;
 import java.io.IOException;
 import java.sql.Array;
 import java.sql.Connection;
@@ -75,8 +80,17 @@ public class DBBroker {
             int komid = rs.getInt("komisijaID");
             String user = rs.getString("user");
             String pass = rs.getString("password");
-            
-            Komisija k = new Komisija(komid, user, pass, null);
+            int c1 = rs.getInt("clan1");
+            int c2 = rs.getInt("clan2");
+            int c3= rs.getInt("clan3");
+            Clan clan1 = vratiClan(c1);
+            Clan clan2 = vratiClan(c2);
+            Clan clan3 = vratiClan(c3);
+            ArrayList<Clan> cla= new ArrayList<>();
+            cla.add(clan1);
+            cla.add(clan2);
+            cla.add(clan3);
+            Komisija k = new Komisija(komid, user, pass, cla);
             
             komisije.add(k);
         }
@@ -103,14 +117,144 @@ public class DBBroker {
     }
 
     public void ubaciKomisiju(Komisija novaKom) throws SQLException {
-       String upit = "INSERT INTO komisija(komisjaID,user,password) VALUES(?,?,?)";
+       String upit = "INSERT INTO komisija(komisijaID,user,password,clan1,clan2,clan3) VALUES(?,?,?,?,?,?)";
         PreparedStatement ps = konekcija.prepareStatement(upit);
         ps.setInt(1, novaKom.getKomisijaID());
         ps.setString(2, novaKom.getUsername());
         ps.setString(3, novaKom.getPassword());
+        ps.setInt(4, novaKom.getListaClanova().get(0).getClanID());
+        ps.setInt(5, novaKom.getListaClanova().get(1).getClanID());
+        ps.setInt(6 ,novaKom.getListaClanova().get(2).getClanID());
         ps.executeUpdate();
         ps.close();
     }
+
+    public void promeniKomisiju(Komisija novaKom) {
+        String upit = "UPDATE komisija SET komisijaID=?,user=?,password=?,clan1=?,clan2=?,clan3=? WHERE komisijaID="+novaKom.getKomisijaID();
+        try {
+            
+            PreparedStatement ps = konekcija.prepareStatement(upit);
+            ps.setInt(1, novaKom.getKomisijaID());
+            ps.setString(2, novaKom.getUsername());
+            ps.setString(3, novaKom.getPassword());
+            ps.setInt(4, novaKom.getListaClanova().get(0).getClanID());
+            ps.setInt(5, novaKom.getListaClanova().get(1).getClanID());
+            ps.setInt(6 ,novaKom.getListaClanova().get(2).getClanID());
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBBroker.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private Clan vratiClan(int c1) {
+        String upit = "SELECT * FROM clan WHERE clanID="+c1;
+        Clan c = new Clan();
+        try {
+            
+            Statement st = konekcija.createStatement();
+            ResultSet rs = st.executeQuery(upit);
+            
+            while(rs.next()) {
+                int idClana = rs.getInt(1);
+                String ime = rs.getString(2);
+                String prezime = rs.getString(3);
+                c= new Clan(idClana, ime, prezime);
+                
+            }
+            rs.close();
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBBroker.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return c;
+    }
+
+    public ArrayList<Drzevljanstvo> vratiDrzevljanstvo() throws SQLException {
+       String upit = "SELECT * FROM drzevljanstvo";
+          ArrayList<Drzevljanstvo> listaDrzevljanstva = new ArrayList<>();
+         Statement st = konekcija.createStatement();
+         ResultSet rs = st.executeQuery(upit);
+         
+         while(rs.next()) {
+             int idDrzevljanstvo = rs.getInt(1);
+             String naziv = rs.getString(2);
+             listaDrzevljanstva.add(new Drzevljanstvo(idDrzevljanstvo, naziv));
+         }
+         rs.close();
+         st.close();
+         return listaDrzevljanstva;
+    }
+
+    public ArrayList<ZanimanjeRoditelja> vratiZanimanja() throws SQLException {
+        String upit = "SELECT * FROM ZanimanjeRoditelja";
+          ArrayList<ZanimanjeRoditelja> listaZanimanjaRoditelja = new ArrayList<>();
+         Statement st = konekcija.createStatement();
+         ResultSet rs = st.executeQuery(upit);
+         
+         while(rs.next()) {
+             int idZanimanje = rs.getInt(1);
+             String naziv = rs.getString(2);
+             ZanimanjeRoditelja zr = new ZanimanjeRoditelja(idZanimanje, naziv);
+             listaZanimanjaRoditelja.add(zr);
+         }
+         rs.close();
+         st.close();
+         return listaZanimanjaRoditelja;
+    }
+
+    public ArrayList<Nacionalnost> vratiNacionalnost() throws SQLException {
+        String upit = "SELECT * FROM Nacionalnost";
+          ArrayList<Nacionalnost> listaNacionalnosti = new ArrayList<>();
+         Statement st = konekcija.createStatement();
+         ResultSet rs = st.executeQuery(upit);
+         
+         while(rs.next()) {
+             int idNcionalnosti = rs.getInt(1);
+             String naziv = rs.getString(2);
+             listaNacionalnosti.add(new Nacionalnost(idNcionalnosti, naziv));
+         }
+         rs.close();
+         st.close();
+         return listaNacionalnosti;
+    }
+
+    public ArrayList<SrednjaSkola> vratiSrednjuSkolu() throws SQLException {
+       String upit = "SELECT * FROM SrednjaSkola";
+          ArrayList<SrednjaSkola> listaSrednjeSkole = new ArrayList<>();
+         Statement st = konekcija.createStatement();
+         ResultSet rs = st.executeQuery(upit);
+         
+         while(rs.next()) {
+             int idSkole = rs.getInt(1);
+             String naziv = rs.getString(2);
+             listaSrednjeSkole.add(new SrednjaSkola(idSkole, naziv));
+         }
+         rs.close();
+         st.close();
+         return listaSrednjeSkole;
+    }
+
+    public void sacuvajKandidata(Kandidat kandidat) throws SQLException {
+       String upit = "INSERT INTO kandidat(prezime,sifraPrijave,jmbg,imeRoditelja,ime,pol,mobilni,fiksni,drzevljanstvoID,sifraZanimanjaRoditelja,sifraSS,nacionalnostID) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+        PreparedStatement ps = konekcija.prepareStatement(upit);
+        ps.setString(1, kandidat.getPrezime());
+        ps.setInt(2, kandidat.getSifraPrijave());
+        ps.setString(3, kandidat.getJmbg());
+        ps.setString(4,kandidat.getImeRoditelja());
+        ps.setString(5, kandidat.getIme());
+        ps.setString(6, kandidat.getPol());
+        ps.setString(7, kandidat.getMobilni());
+        ps.setString(8, kandidat.getFiksni());
+        ps.setInt(9, kandidat.getDrzevljanstvo().getDrzevljanstvoID());
+        ps.setInt(10, kandidat.getZanimanjeRoditelja().getZanimanjeRoditelja());
+        ps.setInt(11 ,kandidat.getSrednjaSkola().getSifraSrednjeSkole());
+        ps.setInt(12 ,kandidat.getNacionalnost().getNacionalnostID());
+        ps.executeUpdate();
+        ps.close();
+    }
+
+    
     
     
 }

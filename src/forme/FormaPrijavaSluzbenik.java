@@ -14,12 +14,16 @@ import logika.Kontroler;
  */
 public class FormaPrijavaSluzbenik extends javax.swing.JFrame {
     int brojac = 3;
-
+FormaPrijaviSe fps;
     /**
      * Creates new form FormaPrijavaSluzbenik
      */
     public FormaPrijavaSluzbenik() {
         initComponents();
+    }
+
+    public void setFps(FormaPrijaviSe fps) {
+        this.fps = fps;
     }
 
     /**
@@ -37,7 +41,6 @@ public class FormaPrijavaSluzbenik extends javax.swing.JFrame {
         txtUsername = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sluzbenik - Log in");
@@ -55,13 +58,6 @@ public class FormaPrijavaSluzbenik extends javax.swing.JFrame {
 
         jLabel2.setText("Password:");
 
-        jButton1.setText("Vrati se unazad");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -70,8 +66,7 @@ public class FormaPrijavaSluzbenik extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnPrijaviSe)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -96,9 +91,7 @@ public class FormaPrijavaSluzbenik extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPrijaviSe)
-                    .addComponent(jButton1))
+                .addComponent(btnPrijaviSe)
                 .addContainerGap())
         );
 
@@ -129,17 +122,12 @@ public class FormaPrijavaSluzbenik extends javax.swing.JFrame {
         
         fzs.setVisible(true);
         this.setVisible(false);
+        fps.setVisible(false);
         }else{
             JOptionPane.showMessageDialog(this, "Sluzbenik sa navedenim podacima ne postoji u bazi! Preostalo pokusaja: " + brojac);
         }
         if(brojac == 0){dispose();}
     }//GEN-LAST:event_btnPrijaviSeActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         FormaPrijaviSe fps = new FormaPrijaviSe();
-           fps.setVisible(true);
-           this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,7 +166,6 @@ public class FormaPrijavaSluzbenik extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPrijaviSe;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblUsername;

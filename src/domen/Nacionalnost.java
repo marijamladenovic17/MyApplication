@@ -36,5 +36,11 @@ public class Nacionalnost {
     public void setNacionalnostID(int nacionalnostID) {
         this.nacionalnostID = nacionalnostID;
     }
+
+    @Override
+    public String toString() {
+        return naziv;
+    }
+    
     
 }

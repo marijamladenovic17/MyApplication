@@ -7,8 +7,13 @@ package logika;
 
 import db.DBBroker;
 import domen.Clan;
+import domen.Drzevljanstvo;
+import domen.Kandidat;
 import domen.Komisija;
+import domen.Nacionalnost;
 import domen.Sluzbenik;
+import domen.SrednjaSkola;
+import domen.ZanimanjeRoditelja;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -112,6 +117,112 @@ public class Kontroler {
             db.ucitajDriver();
             db.otvoriKonekciju();
             db.ubaciKomisiju(novaKom);
+            
+            db.zatvoriKonekciju();
+            ubacen = true;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ubacen;
+    }
+
+    public boolean promeniKomisiju(Komisija novaKom) {
+       boolean ubacen = false;
+        try {
+            
+            db.ucitajDriver();
+            db.otvoriKonekciju();
+            db.promeniKomisiju(novaKom);
+            
+            db.zatvoriKonekciju();
+            ubacen = true;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ubacen;
+    }
+
+    public ArrayList<Drzevljanstvo> vratiDrzevljanstvo() {
+       ArrayList<Drzevljanstvo> listaDrzev = new ArrayList<>();
+         try {
+            
+            db.ucitajDriver();
+            db.otvoriKonekciju();
+            listaDrzev= db.vratiDrzevljanstvo();
+            
+            db.zatvoriKonekciju();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaDrzev;
+    }
+
+    public ArrayList<ZanimanjeRoditelja> vratiSZ() {
+         ArrayList<ZanimanjeRoditelja> listaZanimanja= new ArrayList<>();
+         try {
+            
+            db.ucitajDriver();
+            db.otvoriKonekciju();
+            listaZanimanja= db.vratiZanimanja();
+            
+            db.zatvoriKonekciju();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaZanimanja;
+    }
+
+    public ArrayList<Nacionalnost> vratiNacionalnost() {
+         ArrayList<Nacionalnost> listaNacionalnosti = new ArrayList<>();
+         try {
+            
+            db.ucitajDriver();
+            db.otvoriKonekciju();
+            listaNacionalnosti= db.vratiNacionalnost();
+            
+            db.zatvoriKonekciju();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaNacionalnosti;
+    }
+
+    public ArrayList<SrednjaSkola> vratiSS() {
+         ArrayList<SrednjaSkola> listaSrednjeSkole= new ArrayList<>();
+         try {
+            
+            db.ucitajDriver();
+            db.otvoriKonekciju();
+            listaSrednjeSkole= db.vratiSrednjuSkolu();
+            
+            db.zatvoriKonekciju();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaSrednjeSkole;
+    }
+
+    public boolean sacuvajKandidata(Kandidat kandidat) {
+       boolean ubacen = false;
+        try {
+            
+            db.ucitajDriver();
+            db.otvoriKonekciju();
+            db.sacuvajKandidata(kandidat);
             
             db.zatvoriKonekciju();
             ubacen = true;

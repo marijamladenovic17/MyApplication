@@ -36,6 +36,11 @@ public class ZanimanjeRoditelja {
     public void setZanimanjeRoditelja(int zanimanjeRoditelja) {
         this.zanimanjeRoditelja = zanimanjeRoditelja;
     }
+
+    @Override
+    public String toString() {
+        return zanimanjeRoditelja+"";
+    }
     
     
 }

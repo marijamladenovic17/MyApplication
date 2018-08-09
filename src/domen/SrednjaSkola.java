@@ -36,6 +36,11 @@ public class SrednjaSkola {
     public void setSifraSrednjeSkole(int sifraSrednjeSkole) {
         this.sifraSrednjeSkole = sifraSrednjeSkole;
     }
+
+    @Override
+    public String toString() {
+        return sifraSrednjeSkole+"";
+    }
     
     
 }

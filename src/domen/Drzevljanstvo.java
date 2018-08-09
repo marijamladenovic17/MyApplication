@@ -36,5 +36,11 @@ public class Drzevljanstvo {
     public void setDrzevljanstvoID(int drzevljanstvoID) {
         this.drzevljanstvoID = drzevljanstvoID;
     }
+
+    @Override
+    public String toString() {
+        return naziv;
+    }
+    
     
 }
