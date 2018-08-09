@@ -42,6 +42,7 @@ public class FormaZaIzmenuKomisije extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         cmbKomisija = new javax.swing.JComboBox();
         btnPromeni = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Forma za izmenu komisije");
@@ -59,6 +60,13 @@ public class FormaZaIzmenuKomisije extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Glavni meni");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -66,7 +74,10 @@ public class FormaZaIzmenuKomisije extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnPromeni)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(50, 50, 50)
+                        .addComponent(btnPromeni))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(29, 29, 29)
@@ -81,7 +92,9 @@ public class FormaZaIzmenuKomisije extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(cmbKomisija, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(73, 73, 73)
-                .addComponent(btnPromeni)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPromeni)
+                    .addComponent(jButton1))
                 .addContainerGap(252, Short.MAX_VALUE))
         );
 
@@ -108,6 +121,12 @@ public class FormaZaIzmenuKomisije extends javax.swing.JFrame {
         this.setVisible(false);
         
     }//GEN-LAST:event_btnPromeniActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        FormaZaSluzbenika fzs = new FormaZaSluzbenika();
+        fzs.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,6 +166,7 @@ public class FormaZaIzmenuKomisije extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPromeni;
     private javax.swing.JComboBox cmbKomisija;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

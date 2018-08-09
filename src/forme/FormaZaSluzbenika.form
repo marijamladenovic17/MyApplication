@@ -14,6 +14,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="miUnosKomisije">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+K"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Unos komisije"/>
               </Properties>
               <Events>
@@ -22,6 +25,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="miIzmenaKomisije">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Alt+K"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Izmena komisije"/>
               </Properties>
               <Events>
@@ -30,6 +36,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="miUnosKandidata">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+U"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Unos kandidata"/>
               </Properties>
               <Events>
@@ -38,8 +47,33 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="miUnosTesta">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+M"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Unos grupe zadataka"/>
               </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Sluzbenik"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenu2ActionPerformed"/>
+          </Events>
+          <SubComponents>
+            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jmiIzlogujteSe">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+I"/>
+                </Property>
+                <Property name="selected" type="boolean" value="true"/>
+                <Property name="text" type="java.lang.String" value="Izlogujte se"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiIzlogujteSeActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

@@ -8,11 +8,14 @@ package logika;
 import db.DBBroker;
 import domen.Clan;
 import domen.Drzevljanstvo;
+import domen.GrupaZadatka;
 import domen.Kandidat;
 import domen.Komisija;
 import domen.Nacionalnost;
+import domen.Resenje;
 import domen.Sluzbenik;
 import domen.SrednjaSkola;
+import domen.Test;
 import domen.ZanimanjeRoditelja;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,10 +28,11 @@ import java.util.logging.Logger;
  * @author PC
  */
 public class Kontroler {
-    
+
     ArrayList<Sluzbenik> sluzbenici;
     DBBroker db;
     public static Kontroler instance;
+
     public Kontroler() {
         sluzbenici = new ArrayList<>();
         Sluzbenik s1 = new Sluzbenik("Marija", "maki", "maki");
@@ -39,7 +43,7 @@ public class Kontroler {
     }
 
     public static Kontroler getInstance() {
-        if(instance==null){
+        if (instance == null) {
             instance = new Kontroler();
         }
         return instance;
@@ -47,18 +51,18 @@ public class Kontroler {
 
     public boolean proveriSluzbenika(String username, String password) {
         for (Sluzbenik sluzbenik : sluzbenici) {
-            if(sluzbenik.getUsername().equals(username) && sluzbenik.getPassword().equals(password)){
+            if (sluzbenik.getUsername().equals(username) && sluzbenik.getPassword().equals(password)) {
                 return true;
             }
         }
-        
+
         return false;
     }
 
     public ArrayList<Komisija> vratiSveKomisije() {
-            ArrayList<Komisija> komisije = new ArrayList<>();
+        ArrayList<Komisija> komisije = new ArrayList<>();
         try {
-            
+
             db.ucitajDriver();
             db.otvoriKonekciju();
             komisije = db.vratiKomisije();
@@ -75,7 +79,7 @@ public class Kontroler {
         ArrayList<Komisija> komisije = new ArrayList<>();
         boolean daLiPostojiKom = false;
         try {
-            
+
             db.ucitajDriver();
             db.otvoriKonekciju();
             komisije = db.vratiKomisije();
@@ -95,12 +99,12 @@ public class Kontroler {
 
     public List<Clan> vratiClanove() {
         List<Clan> listaClanova = new ArrayList<>();
-         try {
-            
+        try {
+
             db.ucitajDriver();
             db.otvoriKonekciju();
             listaClanova = db.vratiClanove();
-            
+
             db.zatvoriKonekciju();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
@@ -113,16 +117,16 @@ public class Kontroler {
     public boolean ubaciKomisiju(Komisija novaKom) {
         boolean ubacen = false;
         try {
-            
+
             db.ucitajDriver();
             db.otvoriKonekciju();
             db.ubaciKomisiju(novaKom);
-            
+
             db.zatvoriKonekciju();
             ubacen = true;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -130,18 +134,18 @@ public class Kontroler {
     }
 
     public boolean promeniKomisiju(Komisija novaKom) {
-       boolean ubacen = false;
+        boolean ubacen = false;
         try {
-            
+
             db.ucitajDriver();
             db.otvoriKonekciju();
             db.promeniKomisiju(novaKom);
-            
+
             db.zatvoriKonekciju();
             ubacen = true;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -149,13 +153,13 @@ public class Kontroler {
     }
 
     public ArrayList<Drzevljanstvo> vratiDrzevljanstvo() {
-       ArrayList<Drzevljanstvo> listaDrzev = new ArrayList<>();
-         try {
-            
+        ArrayList<Drzevljanstvo> listaDrzev = new ArrayList<>();
+        try {
+
             db.ucitajDriver();
             db.otvoriKonekciju();
-            listaDrzev= db.vratiDrzevljanstvo();
-            
+            listaDrzev = db.vratiDrzevljanstvo();
+
             db.zatvoriKonekciju();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
@@ -166,13 +170,13 @@ public class Kontroler {
     }
 
     public ArrayList<ZanimanjeRoditelja> vratiSZ() {
-         ArrayList<ZanimanjeRoditelja> listaZanimanja= new ArrayList<>();
-         try {
-            
+        ArrayList<ZanimanjeRoditelja> listaZanimanja = new ArrayList<>();
+        try {
+
             db.ucitajDriver();
             db.otvoriKonekciju();
-            listaZanimanja= db.vratiZanimanja();
-            
+            listaZanimanja = db.vratiZanimanja();
+
             db.zatvoriKonekciju();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
@@ -183,13 +187,13 @@ public class Kontroler {
     }
 
     public ArrayList<Nacionalnost> vratiNacionalnost() {
-         ArrayList<Nacionalnost> listaNacionalnosti = new ArrayList<>();
-         try {
-            
+        ArrayList<Nacionalnost> listaNacionalnosti = new ArrayList<>();
+        try {
+
             db.ucitajDriver();
             db.otvoriKonekciju();
-            listaNacionalnosti= db.vratiNacionalnost();
-            
+            listaNacionalnosti = db.vratiNacionalnost();
+
             db.zatvoriKonekciju();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
@@ -200,13 +204,13 @@ public class Kontroler {
     }
 
     public ArrayList<SrednjaSkola> vratiSS() {
-         ArrayList<SrednjaSkola> listaSrednjeSkole= new ArrayList<>();
-         try {
-            
+        ArrayList<SrednjaSkola> listaSrednjeSkole = new ArrayList<>();
+        try {
+
             db.ucitajDriver();
             db.otvoriKonekciju();
-            listaSrednjeSkole= db.vratiSrednjuSkolu();
-            
+            listaSrednjeSkole = db.vratiSrednjuSkolu();
+
             db.zatvoriKonekciju();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
@@ -217,33 +221,63 @@ public class Kontroler {
     }
 
     public boolean sacuvajKandidata(Kandidat kandidat) {
-       boolean ubacen = false;
+        boolean ubacen = false;
         try {
-            
+
             db.ucitajDriver();
             db.otvoriKonekciju();
             db.sacuvajKandidata(kandidat);
-            
+
             db.zatvoriKonekciju();
             ubacen = true;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ubacen;
     }
 
-   
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    public ArrayList<Test> vratiTestove() {
+        ArrayList<Test> listaTest = new ArrayList<>();
+        try {
+
+            db.ucitajDriver();
+            db.otvoriKonekciju();
+            listaTest = db.vratiTest();
+
+            db.zatvoriKonekciju();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaTest;
+    }
+
+    public boolean sacuvajGrupeZadataka(GrupaZadatka gz) {
+        boolean ubacen = false;
+        try {
+
+            db.ucitajDriver();
+            db.otvoriKonekciju();
+            db.sacuvajGZ(gz);
+            ArrayList<Resenje> listr = (ArrayList<Resenje>) gz.getListaResenihZadataka();
+            for (Resenje resenje : listr) {
+                   db.sacuvajResenje(resenje,gz);
+            }
+            
+
+            db.zatvoriKonekciju();
+            ubacen = true;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ubacen;
+    }
+
 }

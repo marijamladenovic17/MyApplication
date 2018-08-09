@@ -21,7 +21,10 @@ public class Resenje {
         this.rbZadatka = rbZadatka;
         this.odgovor = odgovor;
     }
-
+    public Resenje(int rbZadatka) {
+        this.rbZadatka = rbZadatka;
+        
+    }
     public char getOdgovor() {
         return odgovor;
     }
@@ -36,6 +39,11 @@ public class Resenje {
 
     public void setRbZadatka(int rbZadatka) {
         this.rbZadatka = rbZadatka;
+    }
+
+    @Override
+    public String toString() {
+        return rbZadatka+ " "+ odgovor+"\n";
     }
 
    

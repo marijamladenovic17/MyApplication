@@ -7,10 +7,13 @@ package db;
 
 import domen.Clan;
 import domen.Drzevljanstvo;
+import domen.GrupaZadatka;
 import domen.Kandidat;
 import domen.Komisija;
 import domen.Nacionalnost;
+import domen.Resenje;
 import domen.SrednjaSkola;
+import domen.Test;
 import domen.ZanimanjeRoditelja;
 import java.io.IOException;
 import java.sql.Array;
@@ -250,6 +253,44 @@ public class DBBroker {
         ps.setInt(10, kandidat.getZanimanjeRoditelja().getZanimanjeRoditelja());
         ps.setInt(11 ,kandidat.getSrednjaSkola().getSifraSrednjeSkole());
         ps.setInt(12 ,kandidat.getNacionalnost().getNacionalnostID());
+        ps.executeUpdate();
+        ps.close();
+    }
+
+    public ArrayList<Test> vratiTest() throws SQLException {
+      String upit = "SELECT * FROM test";
+          ArrayList<Test> listaTest = new ArrayList<>();
+         Statement st = konekcija.createStatement();
+         ResultSet rs = st.executeQuery(upit);
+         
+         while(rs.next()) {
+             int idTesta = rs.getInt(1);
+             String naziv = rs.getString(2);
+             listaTest.add(new Test(idTesta, naziv));
+         }
+         rs.close();
+         st.close();
+         return listaTest;
+    }
+
+    public void sacuvajGZ(GrupaZadatka gz) throws SQLException {
+       String upit = "INSERT INTO grupazadatka(brojGrupe,testID) VALUES(?,?)";
+        PreparedStatement ps = konekcija.prepareStatement(upit);
+        ps.setInt(1, gz.getBrGrupe());
+        ps.setInt(2,gz.getTest().getTestID());
+        ps.executeUpdate();
+        ps.close();
+    }
+
+    public void sacuvajResenje(Resenje resenje, GrupaZadatka gz) throws SQLException {
+       String upit = "INSERT INTO resenje(rbZadatka,odgovor,brojGrupe) VALUES(?,?,?)";
+        PreparedStatement ps = konekcija.prepareStatement(upit);
+        
+        
+        ps.setInt(1, resenje.getRbZadatka());
+        ps.setString(2, resenje.getOdgovor()+"");
+        ps.setInt(3,gz.getBrGrupe());
+        
         ps.executeUpdate();
         ps.close();
     }

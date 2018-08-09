@@ -40,6 +40,8 @@ public class FormaZaSluzbenika extends javax.swing.JFrame {
         miIzmenaKomisije = new javax.swing.JMenuItem();
         miUnosKandidata = new javax.swing.JMenuItem();
         miUnosTesta = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jmiIzlogujteSe = new javax.swing.JCheckBoxMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,6 +65,7 @@ public class FormaZaSluzbenika extends javax.swing.JFrame {
             }
         });
 
+        miUnosKomisije.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.SHIFT_MASK));
         miUnosKomisije.setText("Unos komisije");
         miUnosKomisije.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,6 +74,7 @@ public class FormaZaSluzbenika extends javax.swing.JFrame {
         });
         jMenu1.add(miUnosKomisije);
 
+        miIzmenaKomisije.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.ALT_MASK));
         miIzmenaKomisije.setText("Izmena komisije");
         miIzmenaKomisije.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,6 +83,7 @@ public class FormaZaSluzbenika extends javax.swing.JFrame {
         });
         jMenu1.add(miIzmenaKomisije);
 
+        miUnosKandidata.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.SHIFT_MASK));
         miUnosKandidata.setText("Unos kandidata");
         miUnosKandidata.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,10 +92,30 @@ public class FormaZaSluzbenika extends javax.swing.JFrame {
         });
         jMenu1.add(miUnosKandidata);
 
+        miUnosTesta.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_MASK));
         miUnosTesta.setText("Unos grupe zadataka");
         jMenu1.add(miUnosTesta);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Sluzbenik");
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
+
+        jmiIzlogujteSe.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.SHIFT_MASK));
+        jmiIzlogujteSe.setSelected(true);
+        jmiIzlogujteSe.setText("Izlogujte se");
+        jmiIzlogujteSe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiIzlogujteSeActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmiIzlogujteSe);
+
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -139,6 +164,16 @@ public class FormaZaSluzbenika extends javax.swing.JFrame {
                
     }//GEN-LAST:event_miIzmenaKomisijeActionPerformed
 
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+        
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
+    private void jmiIzlogujteSeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiIzlogujteSeActionPerformed
+       FormaPrijaviSe fps = new FormaPrijaviSe();
+        fps.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jmiIzlogujteSeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -176,8 +211,10 @@ public class FormaZaSluzbenika extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JCheckBoxMenuItem jmiIzlogujteSe;
     private javax.swing.JMenuItem miIzmenaKomisije;
     private javax.swing.JMenuItem miUnosKandidata;
     private javax.swing.JMenuItem miUnosKomisije;

@@ -56,5 +56,10 @@ public class Test {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return nazivTesta;
+    }
     
 }

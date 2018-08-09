@@ -24,6 +24,8 @@ public class Zadatak {
         this.karton = karton;
     }
 
+    
+
     public Karton getKarton() {
         return karton;
     }
