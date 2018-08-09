@@ -94,6 +94,11 @@ public class FormaZaSluzbenika extends javax.swing.JFrame {
 
         miUnosTesta.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_MASK));
         miUnosTesta.setText("Unos grupe zadataka");
+        miUnosTesta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miUnosTestaActionPerformed(evt);
+            }
+        });
         jMenu1.add(miUnosTesta);
 
         jMenuBar1.add(jMenu1);
@@ -173,6 +178,12 @@ public class FormaZaSluzbenika extends javax.swing.JFrame {
         fps.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jmiIzlogujteSeActionPerformed
+
+    private void miUnosTestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miUnosTestaActionPerformed
+        UnosGrupeZadataka ugz = new  UnosGrupeZadataka();
+        ugz.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_miUnosTestaActionPerformed
 
     /**
      * @param args the command line arguments
