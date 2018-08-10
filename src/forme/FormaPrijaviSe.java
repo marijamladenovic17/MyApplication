@@ -5,6 +5,8 @@
  */
 package forme;
 
+import forme.komisija.FormaPrijavaKomisija;
+import forme.sluzbenik.FormaPrijavaSluzbenik;
 import domen.Komisija;
 import java.awt.Toolkit;
 import java.util.ArrayList;

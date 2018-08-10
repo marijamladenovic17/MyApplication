@@ -6,7 +6,7 @@
 package modeli;
 
 import domen.Resenje;
-import forme.UnosGrupeZadataka;
+import forme.sluzbenik.UnosGrupeZadataka;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;

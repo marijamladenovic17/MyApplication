@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package forme;
+package forme.komisija;
 
 import java.awt.Toolkit;
 
@@ -34,10 +34,9 @@ public class FormaZaKomisiju extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        cbmUnosKartona = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuItem4 = new javax.swing.JCheckBoxMenuItem();
@@ -47,29 +46,29 @@ public class FormaZaKomisiju extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/s2.jpg"))); // NOI18N
-        jLabel1.setText("jLabel1");
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGap(0, 1166, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGap(0, 560, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Glavni meni");
 
-        jCheckBoxMenuItem1.setSelected(true);
-        jCheckBoxMenuItem1.setText("Unos kartona");
-        jMenu1.add(jCheckBoxMenuItem1);
+        cbmUnosKartona.setSelected(true);
+        cbmUnosKartona.setText("Unos kartona");
+        cbmUnosKartona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbmUnosKartonaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(cbmUnosKartona);
 
         jCheckBoxMenuItem2.setSelected(true);
         jCheckBoxMenuItem2.setText("Spajanje kartona");
@@ -118,7 +117,9 @@ public class FormaZaKomisiju extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,6 +140,10 @@ public class FormaZaKomisiju extends javax.swing.JFrame {
     private void jCheckBoxMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxMenuItem3ActionPerformed
+
+    private void cbmUnosKartonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbmUnosKartonaActionPerformed
+        
+    }//GEN-LAST:event_cbmUnosKartonaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,14 +181,13 @@ public class FormaZaKomisiju extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JCheckBoxMenuItem cbmUnosKartona;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem4;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem5;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem6;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem7;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;

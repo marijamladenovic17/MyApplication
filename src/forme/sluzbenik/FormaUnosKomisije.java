@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package forme;
+package forme.sluzbenik;
 
+import forme.sluzbenik.FormaZaSluzbenika;
 import db.Konstanta;
 import domen.Clan;
 import domen.Komisija;

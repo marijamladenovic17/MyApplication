@@ -67,6 +67,11 @@ public class GrupaZadatka {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return brGrupe+"";
+    }
     
     
 }

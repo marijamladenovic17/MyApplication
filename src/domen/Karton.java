@@ -5,6 +5,7 @@
  */
 package domen;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -22,6 +23,7 @@ public class Karton {
     private GrupaZadatka grupaZadataka;
     private Test test;
     private Kandidat kandidat;
+    ArrayList<Zadatak> listaOdg = new ArrayList<>();
     
     public Karton() {
     }
@@ -37,6 +39,14 @@ public class Karton {
         this.grupaZadataka = grupaZadataka;
         this.test = test;
         this.kandidat = kandidat;
+    }
+
+    public void setListaOdg(ArrayList<Zadatak> listaOdg) {
+        this.listaOdg = listaOdg;
+    }
+
+    public ArrayList<Zadatak> getListaOdg() {
+        return listaOdg;
     }
 
    

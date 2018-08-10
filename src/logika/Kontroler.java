@@ -265,9 +265,8 @@ public class Kontroler {
             db.sacuvajGZ(gz);
             ArrayList<Resenje> listr = (ArrayList<Resenje>) gz.getListaResenihZadataka();
             for (Resenje resenje : listr) {
-                   db.sacuvajResenje(resenje,gz);
+                db.sacuvajResenje(resenje, gz);
             }
-            
 
             db.zatvoriKonekciju();
             ubacen = true;
@@ -280,4 +279,58 @@ public class Kontroler {
         return ubacen;
     }
 
-}
+    public int vratiKartonID() {
+        int br = 0;
+        try {
+
+            db.ucitajDriver();
+            db.otvoriKonekciju();
+            br = db.vratiKartonID();
+
+            db.zatvoriKonekciju();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return br;
+    }
+
+    public ArrayList<GrupaZadatka> vratiGrupuZadataka() {
+        ArrayList<GrupaZadatka> listag = new ArrayList<>();
+         try {
+
+            db.ucitajDriver();
+            db.otvoriKonekciju();
+            listag = db.vratiGZ();
+
+            db.zatvoriKonekciju();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return listag;
+    }
+
+    public Kandidat proveriKarton( String brojPrijave) {
+       Kandidat kan = new Kandidat();
+        try {
+
+            db.ucitajDriver();
+            db.otvoriKonekciju();
+             kan =db.vratiKandidata(brojPrijave);
+
+            db.zatvoriKonekciju();
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return kan;
+    
+    }
+    }

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package forme;
+package forme.sluzbenik;
 
+import forme.sluzbenik.FormaZaSluzbenika;
 import domen.Clan;
 import domen.Drzevljanstvo;
 import domen.Kandidat;
@@ -352,7 +353,7 @@ public class FormaUnosKandidata extends javax.swing.JFrame {
         int brojPrijave = 0;
         regex = "[0-9]+";
         if (brojP.matches(regex)) {
-            brojPrijave = Integer.parseInt(brojP);
+            
         } else {
             JOptionPane.showMessageDialog(this, "Unesite broj za polje BROJ PRIJAVE!");
             return;
@@ -368,7 +369,7 @@ public class FormaUnosKandidata extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Unesite fiksni telefon u formatu 01x/xxxxxxx");
             return;
         }
-        Kandidat kandidat = new Kandidat(brojPrijave, jmbg, ime, imeRoditelja, pol, prezime, mobilni, fiksni, ss, nac, z, drzevlj);
+        Kandidat kandidat = new Kandidat(brojP, jmbg, ime, imeRoditelja, pol, prezime, mobilni, fiksni, ss, nac, z, drzevlj);
         boolean sacuvano = Kontroler.getInstance().sacuvajKandidata(kandidat);
         if(sacuvano){
             JOptionPane.showMessageDialog(this, "Uspesno sacuvan kandidat!");

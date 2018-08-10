@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Kandidat {
 
-    private int sifraPrijave;
+    private String sifraPrijave;
     private String jmbg;
     private String ime;
     private String imeRoditelja;
@@ -30,7 +30,7 @@ public class Kandidat {
     public Kandidat() {
     }
 
-    public Kandidat(int sifraPrijave, String jmbg, String ime, String imeRoditelja, String pol, String prezime, String mobilni, String fiksni, SrednjaSkola srednjaSkola, Nacionalnost nacionalnost, ZanimanjeRoditelja zanimanjeRoditelja, Drzevljanstvo drzevljanstvo) {
+    public Kandidat(String sifraPrijave, String jmbg, String ime, String imeRoditelja, String pol, String prezime, String mobilni, String fiksni, SrednjaSkola srednjaSkola, Nacionalnost nacionalnost, ZanimanjeRoditelja zanimanjeRoditelja, Drzevljanstvo drzevljanstvo) {
         this.sifraPrijave = sifraPrijave;
         this.jmbg = jmbg;
         this.ime = ime;
@@ -70,13 +70,15 @@ public class Kandidat {
         this.listaKartona = listaKartona;
     }
 
-    public int getSifraPrijave() {
+    public String getSifraPrijave() {
         return sifraPrijave;
     }
 
-    public void setSifraPrijave(int sifraPrijave) {
+    public void setSifraPrijave(String sifraPrijave) {
         this.sifraPrijave = sifraPrijave;
     }
+
+    
 
     public String getJmbg() {
         return jmbg;

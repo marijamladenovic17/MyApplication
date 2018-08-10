@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package forme;
+package forme.sluzbenik;
 
 import domen.GrupaZadatka;
 import domen.Resenje;
@@ -48,6 +48,7 @@ public class UnosGrupeZadataka extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaZadataka = new javax.swing.JTable();
         btnResenja = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtSifraGrupeZadataka = new javax.swing.JTextField();
@@ -86,6 +87,13 @@ public class UnosGrupeZadataka extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Glavni meni");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -104,6 +112,8 @@ public class UnosGrupeZadataka extends javax.swing.JFrame {
                                 .addComponent(cmbTest, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
                         .addComponent(btnResenja)))
                 .addContainerGap())
         );
@@ -117,7 +127,9 @@ public class UnosGrupeZadataka extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addComponent(btnResenja)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnResenja)
+                    .addComponent(jButton1))
                 .addGap(35, 35, 35))
         );
 
@@ -198,6 +210,12 @@ public class UnosGrupeZadataka extends javax.swing.JFrame {
         srediTabelu();
     }//GEN-LAST:event_cmbTestActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       FormaZaSluzbenika fzs = new FormaZaSluzbenika();
+       fzs.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -236,6 +254,7 @@ public class UnosGrupeZadataka extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnResenja;
     private javax.swing.JComboBox cmbTest;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
