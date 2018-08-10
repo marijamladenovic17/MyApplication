@@ -1,6 +1,6 @@
 /*
-SQLyog Community v12.4.1 (64 bit)
-MySQL - 10.1.30-MariaDB : Database - mojaaplikacija
+SQLyog Community v12.5.1 (64 bit)
+MySQL - 10.1.26-MariaDB : Database - mojaaplikacija
 *********************************************************************
 */
 
@@ -70,11 +70,18 @@ CREATE TABLE `grupazadatka` (
 
 /*Data for the table `grupazadatka` */
 
+insert  into `grupazadatka`(`brojGrupe`,`testID`) values 
+('1225',1),
+('1234',1),
+('125',1),
+('222',2);
+
 /*Table structure for table `kandidat` */
 
 DROP TABLE IF EXISTS `kandidat`;
 
 CREATE TABLE `kandidat` (
+  `prezime` varchar(255) DEFAULT NULL,
   `sifraPrijave` int(11) NOT NULL,
   `jmbg` varchar(255) DEFAULT NULL,
   `imeRoditelja` varchar(255) DEFAULT NULL,
@@ -98,6 +105,9 @@ CREATE TABLE `kandidat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `kandidat` */
+
+insert  into `kandidat`(`prezime`,`sifraPrijave`,`jmbg`,`imeRoditelja`,`ime`,`pol`,`mobilni`,`fiksni`,`drzevljanstvoID`,`sifraZanimanjaRoditelja`,`sifraSS`,`nacionalnostID`) values 
+('Mladenovic',1,'1705995887796','Bora','Marija','Zenski','064-77845230','018/55426',1,100,200,300);
 
 /*Table structure for table `karton` */
 
@@ -127,16 +137,20 @@ CREATE TABLE `karton` (
 DROP TABLE IF EXISTS `komisija`;
 
 CREATE TABLE `komisija` (
-  `komisjaID` int(11) NOT NULL,
+  `komisijaID` int(11) NOT NULL,
   `user` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`komisjaID`)
+  `clan1` int(11) DEFAULT NULL,
+  `clan2` int(11) DEFAULT NULL,
+  `clan3` int(11) DEFAULT NULL,
+  PRIMARY KEY (`komisijaID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `komisija` */
 
-insert  into `komisija`(`komisjaID`,`user`,`password`) values 
-(3645,'kjbvsd','hbids');
+insert  into `komisija`(`komisijaID`,`user`,`password`,`clan1`,`clan2`,`clan3`) values 
+(111,'komisija1','prvakomisija',1,5,3),
+(112,'komisija2','drugakomisija',3,6,1);
 
 /*Table structure for table `nacionalnost` */
 
@@ -187,14 +201,66 @@ DROP TABLE IF EXISTS `resenje`;
 CREATE TABLE `resenje` (
   `resenjeID` int(11) NOT NULL AUTO_INCREMENT,
   `rbZadatka` int(11) DEFAULT NULL,
-  `odgovor` char(1) DEFAULT NULL,
+  `odgovor` varchar(1) DEFAULT NULL,
   `brojGrupe` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`resenjeID`),
   KEY `brojGrupe` (`brojGrupe`),
   CONSTRAINT `resenje_ibfk_1` FOREIGN KEY (`brojGrupe`) REFERENCES `grupazadatka` (`brojGrupe`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 
 /*Data for the table `resenje` */
+
+insert  into `resenje`(`resenjeID`,`rbZadatka`,`odgovor`,`brojGrupe`) values 
+(1,1,'A','1225'),
+(2,2,'B','1225'),
+(3,3,'C','1225'),
+(4,4,'D','1225'),
+(5,5,'E','1225'),
+(6,6,'A','1225'),
+(7,7,'b','1225'),
+(8,8,'c','1225'),
+(9,9,'d','1225'),
+(10,10,'e','1225'),
+(11,11,'b','1225'),
+(12,12,'b','1225'),
+(13,13,'a','1225'),
+(14,14,'c','1225'),
+(15,15,'d','1225'),
+(16,16,'b','1225'),
+(17,17,'e','1225'),
+(18,18,'n','1225'),
+(19,19,'a','1225'),
+(20,20,'a','1225'),
+(21,1,'a','222'),
+(22,2,'b','222'),
+(23,3,'c','222'),
+(24,4,'d','222'),
+(25,5,'e','222'),
+(26,6,'e','222'),
+(27,7,'a','222'),
+(28,8,'b','222'),
+(29,9,'c','222'),
+(30,10,'d','222'),
+(31,11,'e','222'),
+(32,12,'n','222'),
+(33,13,'a','222'),
+(34,14,'b','222'),
+(35,15,'c','222'),
+(36,16,'d','222'),
+(37,17,'e','222'),
+(38,18,'e','222'),
+(39,19,'a','222'),
+(40,20,'b','222'),
+(41,21,'c','222'),
+(42,22,'d','222'),
+(43,23,'d','222'),
+(44,24,'a','222'),
+(45,25,'a','222'),
+(46,26,'a','222'),
+(47,27,'b','222'),
+(48,28,'b','222'),
+(49,29,'b','222'),
+(50,30,'d','222');
 
 /*Table structure for table `spajanje` */
 
@@ -248,6 +314,10 @@ CREATE TABLE `test` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `test` */
+
+insert  into `test`(`testID`,`nazivTesta`) values 
+(1,'Matematika'),
+(2,'Test opste informisanosti');
 
 /*Table structure for table `zadatak` */
 
