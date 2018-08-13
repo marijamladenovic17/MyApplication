@@ -9,6 +9,7 @@ import domen.Clan;
 import domen.Drzevljanstvo;
 import domen.GrupaZadatka;
 import domen.Kandidat;
+import domen.Karton;
 import domen.Komisija;
 import domen.Nacionalnost;
 import domen.Resenje;
@@ -376,13 +377,31 @@ public class DBBroker {
            String fiksni =rs.getString(8);
            k.setIme(ime);
            k.setPrezime(prezime);
-           k.setSifraPrijave(sifraPrijave);
+           k.setSifraPrijave(brojPrijave);
+           k.setJmbg(jmbg);
            
            
        }
        rs.close();
        s.close();
        return k;
+    }
+
+    public void sacuvajKarton(Karton karton) throws SQLException {
+       String upit = "INSERT INTO karton(brojUnosa,kartonID,brojKartona,kandidatID,sifraPrijave,rezultatTesta,brojGrupe) VALUES(?,?,?,?,?,?,?)";
+        PreparedStatement ps = konekcija.prepareStatement(upit);
+
+        ps.setInt(1, karton.getBrUnosa());
+        ps.setInt(2, karton.getKartonID());
+        ps.setInt(3, karton.getBrKartona());
+        ps.setString(4, karton.getKandidat().getJmbg());
+        ps.setString(5, karton.getSifraPrijave());
+        ps.setDouble(6, karton.getRezultatTesta());
+        ps.setInt(7, karton.getGrupaZadataka().getBrGrupe());
+        
+
+        ps.executeUpdate();
+        ps.close();
     }
     
 

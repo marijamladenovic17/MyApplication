@@ -13,31 +13,29 @@ import java.util.Objects;
  * @author PC
  */
 public class Karton {
+
     private int kartonID;
     private int brKartona;
-    private String ime;
-    private String prezime;
     private String sifraPrijave;
-    private float rezultatTesta;
+    private double rezultatTesta;
     private int brUnosa;
     private GrupaZadatka grupaZadataka;
     private Test test;
     private Kandidat kandidat;
     ArrayList<Zadatak> listaOdg = new ArrayList<>();
-    
+
     public Karton() {
     }
 
-    public Karton(int kartonID, int brKartona, String ime, String prezime, String sifraPrijave, float rezultatTesta, int brUnosa, GrupaZadatka grupaZadataka, Test test, Kandidat kandidat) {
+    public Karton(int kartonID, int brKartona, String sifraPrijave, double rezultatTesta, int brUnosa, GrupaZadatka grupaZadataka, Kandidat kandidat) {
         this.kartonID = kartonID;
         this.brKartona = brKartona;
-        this.ime = ime;
-        this.prezime = prezime;
+
         this.sifraPrijave = sifraPrijave;
         this.rezultatTesta = rezultatTesta;
         this.brUnosa = brUnosa;
         this.grupaZadataka = grupaZadataka;
-        this.test = test;
+
         this.kandidat = kandidat;
     }
 
@@ -49,9 +47,6 @@ public class Karton {
         return listaOdg;
     }
 
-   
-    
-
     public Test getTest() {
         return test;
     }
@@ -59,8 +54,6 @@ public class Karton {
     public void setTest(Test test) {
         this.test = test;
     }
-
-    
 
     public int getBrUnosa() {
         return brUnosa;
@@ -86,22 +79,6 @@ public class Karton {
         this.brKartona = brKartona;
     }
 
-    public String getIme() {
-        return ime;
-    }
-
-    public void setIme(String ime) {
-        this.ime = ime;
-    }
-
-    public String getPrezime() {
-        return prezime;
-    }
-
-    public void setPrezime(String prezime) {
-        this.prezime = prezime;
-    }
-
     public String getSifraPrijave() {
         return sifraPrijave;
     }
@@ -110,21 +87,15 @@ public class Karton {
         this.sifraPrijave = sifraPrijave;
     }
 
-    public float getRezultatTesta() {
-        return rezultatTesta;
-    }
+   
 
-    public void setRezultatTesta(float rezultatTesta) {
-        this.rezultatTesta = rezultatTesta;
-    }
+    
 
     @Override
     public String toString() {
-        return"";
-        
-    }
+        return "";
 
-   
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -160,8 +131,12 @@ public class Karton {
         this.kandidat = kandidat;
     }
 
-    
+    public double getRezultatTesta() {
+        return rezultatTesta;
+    }
 
-    
-    
+    public void setRezultatTesta(double rezultatTesta) {
+        this.rezultatTesta = rezultatTesta;
+    }
+
 }

@@ -8,6 +8,7 @@ package forme.komisija;
 import db.Konstanta;
 import domen.GrupaZadatka;
 import domen.Kandidat;
+import domen.Karton;
 import domen.Resenje;
 import domen.Test;
 import java.awt.Toolkit;
@@ -345,12 +346,16 @@ public class FormaUnosKartona extends javax.swing.JFrame {
             for (Resenje resenje1 : listaOdgovora) {
                 if (resenje.getRbZadatka() == resenje1.getRbZadatka()) {
                     String s1 = resenje.getOdgovor() + "";
+                    s1 = s1.toUpperCase();
+                    System.out.println("+"+s1+"+");
                     String s2 = resenje1.getOdgovor() + "";
+                    s2 = s2.toUpperCase();
+                    System.out.println("+"+s1+"+");
                     if (s2.equals(" ")) {
                         ukupanBrojBodova = ukupanBrojBodova - 1;
                         break;
                     }
-                    if (s2 != "N") {
+                    if (!s2.equals("N")) {
                         if (s1.toUpperCase().equals(s2.toUpperCase())) {
                             ukupanBrojBodova += 3;
                         } else {
@@ -372,7 +377,34 @@ public class FormaUnosKartona extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUkupanBrojPoenaActionPerformed
 
     private void btnSacuvajKartonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacuvajKartonActionPerformed
+        String kid = txtKartonID.getText();
+        String brUnosa = txtBrojUnosaKartona.getText();
+        String brojKar = txtBrojKartona.getText();
+        if (kid.isEmpty() || brUnosa.isEmpty() || brojKar.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Popunite sve podatke o kartonu!");
+            return;
+        }
 
+        GrupaZadatka gz = (GrupaZadatka) cmbGZ.getSelectedItem();
+        String rezultat = lblUkupanBrPoena.getText();
+        String brojPrijave = txtSifraPrijave.getText();
+        if(rezultat.isEmpty() || brojPrijave.isEmpty() || gz==null){
+            JOptionPane.showMessageDialog(this, "Niste uneli sva polja!");
+            return;
+        }
+        int kartonID = Integer.parseInt(kid);
+        int brojUnosa = Integer.parseInt(brUnosa);
+        int brojKartona = Integer.parseInt(brojKar);
+        double rez = Double.parseDouble(rezultat);
+        Kandidat kandidat = Kontroler.getInstance().proveriKarton(brojPrijave);
+        Karton karton = new Karton(kartonID, brojKartona, brojPrijave,rez, brojUnosa, gz, kandidat);
+        boolean sacuvano = Kontroler.getInstance().unesiKarton(karton);
+        if(sacuvano){
+            JOptionPane.showMessageDialog(this, "Uspesno sacuvan karton!");
+        }else {
+        JOptionPane.showMessageDialog(this, "Neuspesno sacuvan karton!");
+        }
+        //int
     }//GEN-LAST:event_btnSacuvajKartonActionPerformed
 
     private void btnProveriPodatkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveriPodatkeActionPerformed
