@@ -10,6 +10,7 @@ import domen.Clan;
 import domen.Drzevljanstvo;
 import domen.GrupaZadatka;
 import domen.Kandidat;
+import domen.Karton;
 import domen.Komisija;
 import domen.Nacionalnost;
 import domen.Resenje;
@@ -332,5 +333,9 @@ public class Kontroler {
         }
         return kan;
     
+    }
+
+    public Karton nadjiKarton(int sifra) {
+        return null;
     }
     }

@@ -142,7 +142,9 @@ public class FormaZaKomisiju extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBoxMenuItem3ActionPerformed
 
     private void cbmUnosKartonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbmUnosKartonaActionPerformed
-        
+        FormaUnosKartona fuk = new FormaUnosKartona();
+        fuk.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_cbmUnosKartonaActionPerformed
 
     /**
