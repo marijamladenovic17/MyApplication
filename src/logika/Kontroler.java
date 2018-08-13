@@ -395,6 +395,7 @@ public class Kontroler {
     
     }
 
+
     public boolean unesiKarton(Karton karton) {
        boolean ubacen = false;
         try {
@@ -419,4 +420,9 @@ public class Kontroler {
         }
         return ubacen;
     }
+
+//    public Karton nadjiKarton(int sifra) {
+//        return null;
+//    }
+    
     }
