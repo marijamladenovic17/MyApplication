@@ -407,7 +407,7 @@ public class DBBroker {
     
     public Karton vratiKarton(int kartonskiBroj) throws SQLException {
         Karton kart = null;
-        String upit = "select * from karton k join grupazadatka g on k.brojGrupe = g.brojGrupe join test t on k.testID = t.testID where k.brojKartona = "+kartonskiBroj + " limit 1";
+        String upit = "SELECT * FROM karton k JOIN grupazadatka g ON k.brojGrupe = g.brojGrupe JOIN test t ON g.testID = t.testID WHERE k.brojKartona = " + kartonskiBroj+" LIMIT 1";
         Statement st = konekcija.createStatement();
         ResultSet rs = st.executeQuery(upit);
         while (rs.next()) {

@@ -217,7 +217,7 @@ public class FormaPretragaKartona extends javax.swing.JFrame {
         if(karton!=null){
             panelZaNestajanje.setVisible(true);
             lblGrupaZadataka.setText(karton.getGrupaZadataka().getBrGrupe()+"");
-            lblTest.setText(karton.getTest().getNazivTesta());
+            lblTest.setText(karton.getGrupaZadataka().getTest().getNazivTesta());
             ArrayList<Zadatak> zadaciKartona = karton.getListaOdg();
             ModelTabelePretragaKartona mtr = new ModelTabelePretragaKartona();
             mtr.setZadaci(zadaciKartona);
