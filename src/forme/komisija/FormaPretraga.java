@@ -186,9 +186,7 @@ public class FormaPretraga extends javax.swing.JFrame {
 //        int sifra = Integer.parseInt(txtSifra.getText());
 //        Karton karton = Kontroler.getInstance().nadjiKarton(sifra);
 //        
-//        if(karton==null){
-//            JOptionPane.showMessageDialog(this, "Karton sa tom sifrom ne postoji");
-//        }else{
+//        
 //            
 //        }
     }//GEN-LAST:event_btnNadjiActionPerformed
