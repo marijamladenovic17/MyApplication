@@ -404,5 +404,21 @@ public class DBBroker {
         ps.close();
     }
     
+    
+    public Karton vratiKarton(int kartonskiBroj) throws SQLException {
+        Karton kart = null;
+        String upit = "select * from karton k join grupazadatka g on k.brojGrupe = g.brojGrupe join test t on k.testID = t.testID where k.brojKartona = "+kartonskiBroj + " limit 1";
+        Statement st = konekcija.createStatement();
+        ResultSet rs = st.executeQuery(upit);
+        while (rs.next()) {
+            Test t = new Test(rs.getInt("t.testID"), rs.getString("nazivTesta"));
+            GrupaZadatka gz = new GrupaZadatka(rs.getInt("g.brojGrupe"), null, t);
+            kart = new Karton(rs.getInt("kartonID"),rs.getInt("brojKartona") , null, 0, rs.getInt("brojUnosa"), gz, null);
+            return kart;
+        }
+        
+        return kart;
+    }
+    
 
 }
