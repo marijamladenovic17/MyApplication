@@ -72,6 +72,7 @@ public class FormaUnosKartona extends javax.swing.JFrame {
         btnProveriPodatke = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         txtSifraPrijave = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtKartonID = new javax.swing.JTextField();
@@ -177,6 +178,13 @@ public class FormaUnosKartona extends javax.swing.JFrame {
 
         jLabel8.setText("Sifra prijave:");
 
+        jButton1.setText("Glavna forma");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -187,14 +195,19 @@ public class FormaUnosKartona extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblIme)
-                        .addGap(34, 34, 34)
-                        .addComponent(txtImeKandidata, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
-                        .addComponent(lblPrezime)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtPrezimeKandidata, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(225, 225, 225)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblIme)
+                                .addGap(34, 34, 34)
+                                .addComponent(txtImeKandidata, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(42, 42, 42)
+                                .addComponent(lblPrezime)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtPrezimeKandidata, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(225, 225, 225))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(58, 58, 58)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnSacuvajKarton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnProveriPodatke, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -237,7 +250,9 @@ public class FormaUnosKartona extends javax.swing.JFrame {
                     .addComponent(txtPrezimeKandidata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnProveriPodatke))
                 .addGap(18, 18, 18)
-                .addComponent(btnSacuvajKarton)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSacuvajKarton)
+                    .addComponent(jButton1))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -423,6 +438,12 @@ public class FormaUnosKartona extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnProveriPodatkeActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        FormaZaKomisiju fzk = new FormaZaKomisiju();
+        fzk.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -463,6 +484,7 @@ public class FormaUnosKartona extends javax.swing.JFrame {
     private javax.swing.JButton btnSacuvajKarton;
     private javax.swing.JButton btnUkupanBrojPoena;
     private javax.swing.JComboBox cmbGZ;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
